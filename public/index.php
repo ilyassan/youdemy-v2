@@ -15,57 +15,55 @@
     require_all_files(__DIR__ . '/../app/Helpers');
     require_once __DIR__ . '/../app/Models/User.php';
     require_all_files(__DIR__ . '/../app/Models');
+    require_all_files(__DIR__ . '/../app/Controllers');
 
     // Define the routes
     $router = new Router();
     $request = new Request();
 
-    $router->add('GET', '/', 'HomePage@index', ["visitor", "student"]);
-    $router->add('GET', '/courses', 'CoursesPage@index', ["visitor", "student"]);
-    $router->add('POST', '/courses/enroll/{id}', 'CoursesPage@enroll', ["student"]);
-    $router->add('POST', '/courses/completed/{id}', 'CoursesPage@completed', ["student"]);
-    $router->add('GET', '/courses/content/{id}', 'CourseContentPage@index', ["visitor", "student"]);
-    $router->add('GET', '/courses/{id}', 'CoursesPage@show', ["visitor", "student"]);
-    $router->add('GET', '/my-courses', 'MyCoursesPage@index', ["student"]);
+    $router->get('/', [HomePage::class, 'index'], ["visitor", "student"]);
+    $router->get('/courses', [CoursesPage::class, 'index'], ["visitor", "student"]);
+    $router->post('/courses/enroll/{id}', [CoursesPage::class, 'enroll'], ["student"]);
+    $router->post('/courses/completed/{id}', [CoursesPage::class, 'completed'], ["student"]);
+    $router->get('/courses/content/{id}', [CourseContentPage::class, 'index'], ["visitor", "student"]);
+    $router->get('/courses/{id}', [CoursesPage::class, 'show'], ["visitor", "student"]);
+    $router->get('/my-courses', [MyCoursesPage::class, 'index'], ["student"]);
 
+    $router->post('/api/rate/create', [MyCoursesPage::class, 'rateCourse'], ["student"]);
+    $router->post('/api/rate/delete', [MyCoursesPage::class, 'deleteCourseRate'], ["student"]);
 
-    $router->add('POST', '/api/rate/create', 'MyCoursesPage@rateCourse', ["student"]);
-    $router->add('POST', '/api/rate/delete', 'MyCoursesPage@deleteCourseRate', ["student"]);
+    $router->get('/', [DashboardTeacherPage::class, 'index'], ["teacher"]);
+    $router->get('/courses', [CoursesTeacherPage::class, 'index'], ["teacher"]);
+    $router->get('/courses/create', [CoursesTeacherPage::class, 'create'], ["teacher"]);
+    $router->post('/courses/store', [CoursesTeacherPage::class, 'store'], ["teacher"]);
+    $router->get('/courses/edit/{id}', [CoursesTeacherPage::class, 'edit'], ["teacher"]);
+    $router->post('/courses/update/{id}', [CoursesTeacherPage::class, 'update'], ["teacher"]);
+    $router->post('/courses/delete/{id}', [CoursesTeacherPage::class, 'delete'], ["teacher"]);
+    $router->get('/students', [StudentsTeacherPage::class, 'index'], ["teacher"]);
 
-    $router->add('GET', '/', 'DashboardTeacherPage@index', ["teacher"]);
-    $router->add('GET', '/courses', 'CoursesTeacherPage@index', ["teacher"]);
-    $router->add('GET', '/courses/create', 'CoursesTeacherPage@create', ["teacher"]);
-    $router->add('POST', '/courses/store', 'CoursesTeacherPage@store', ["teacher"]);
-    $router->add('GET', '/courses/edit/{id}', 'CoursesTeacherPage@edit', ["teacher"]);
-    $router->add('POST', '/courses/update/{id}', 'CoursesTeacherPage@update', ["teacher"]);
-    $router->add('POST', '/courses/delete/{id}', 'CoursesTeacherPage@delete', ["teacher"]);
-    $router->add('GET', '/students', 'StudentsTeacherPage@index', ["teacher"]);
+    $router->get('/', [DashboardAdminPage::class, 'index'], ["admin"]);
+    $router->get('/courses', [CoursesAdminPage::class, 'index'], ["admin"]);
+    $router->get('/courses/{id}', [CoursesAdminPage::class, 'show'], ["admin"]);
+    $router->post('/courses/delete/{id}', [CoursesAdminPage::class, 'delete'], ["admin"]);
+    $router->get('/teachers', [TeachersAdminPage::class, 'index'], ["admin"]);
+    $router->get('/students', [StudentsAdminPage::class, 'index'], ["admin"]);
+    $router->get('/banned-students', [BannedStudentsAdminPage::class, 'index'], ["admin"]);
+    $router->post('/students/ban/{id}', [BannedStudentsAdminPage::class, 'ban'], ["admin"]);
+    $router->post('/students/unban/{id}', [BannedStudentsAdminPage::class, 'unBan'], ["admin"]);
+    $router->get('/unverified-teachers', [UnverifiedTeachersAdminPage::class, 'index'], ["admin"]);
+    $router->post('/teachers/verify/{id}', [UnverifiedTeachersAdminPage::class, 'verify'], ["admin"]);
+    $router->get('/categories', [CategoriesAdminPage::class, 'index'], ["admin"]);
+    $router->post('/categories/store', [CategoriesAdminPage::class, 'store'], ["admin"]);
+    $router->post('/categories/delete', [CategoriesAdminPage::class, 'delete'], ["admin"]);
+    $router->get('/tags', [TagsAdminPage::class, 'index'], ["admin"]);
+    $router->post('/tags/store', [TagsAdminPage::class, 'store'], ["admin"]);
+    $router->post('/tags/delete', [TagsAdminPage::class, 'delete'], ["admin"]);
 
-    $router->add('GET', '/', 'DashboardAdminPage@index', ["admin"]);
-    $router->add('GET', '/courses', 'CoursesAdminPage@index', ["admin"]);
-    $router->add('GET', '/courses/{id}', 'CoursesAdminPage@show', ["admin"]);
-    $router->add('POST', '/courses/delete/{id}', 'CoursesAdminPage@delete', ["admin"]);
-    $router->add('GET', '/teachers', 'TeachersAdminPage@index', ["admin"]);
-    $router->add('GET', '/students', 'StudentsAdminPage@index', ["admin"]);
-    $router->add('GET', '/banned-students', 'BannedStudentsAdminPage@index', ["admin"]);
-    $router->add('POST', '/students/ban/{id}', 'BannedStudentsAdminPage@ban', ["admin"]);
-    $router->add('POST', '/students/unban/{id}', 'BannedStudentsAdminPage@unBan', ["admin"]);
-    $router->add('GET', '/unverified-teachers', 'UnverifiedTeachersAdminPage@index', ["admin"]);
-    $router->add('POST', '/teachers/verify/{id}', 'UnverifiedTeachersAdminPage@verify', ["admin"]);
-    $router->add('GET', '/categories', 'CategoriesAdminPage@index', ["admin"]);
-    $router->add('POST', '/categories/store', 'CategoriesAdminPage@store', ["admin"]);
-    $router->add('POST', '/categories/delete', 'CategoriesAdminPage@delete', ["admin"]);
-    $router->add('GET', '/tags', 'TagsAdminPage@index', ["admin"]);
-    $router->add('POST', '/tags/store', 'TagsAdminPage@store', ["admin"]);
-    $router->add('POST', '/tags/delete', 'TagsAdminPage@delete', ["admin"]);
+    $router->get('/login', [LoginPage::class, 'index'], ["visitor"]);
+    $router->post('/login', [LoginPage::class, 'login'], ["visitor"]);
+    $router->get('/signup', [SignupPage::class, 'index'], ["visitor"]);
+    $router->post('/signup', [SignupPage::class, 'signup'], ["visitor"]);
 
-
-
-    $router->add('GET', '/login', 'LoginPage@index', ["visitor"]);
-    $router->add('POST', '/login', 'LoginPage@login', ["visitor"]);
-    $router->add('GET', '/signup', 'SignupPage@index', ["visitor"]);
-    $router->add('POST', '/signup', 'SignupPage@signup', ["visitor"]);
-    
-    $router->add('POST', '/logout', 'LoginPage@logout', ["student", "teacher", "admin"]);
+    $router->post('/logout', [LoginPage::class, 'logout'], ["student", "teacher", "admin"]);
 
     $router->dispatch($request);

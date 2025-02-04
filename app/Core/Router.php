@@ -9,6 +9,16 @@ class Router
         $this->routes[] = compact('method', 'path', 'callback', "roles");
     }
 
+    public function get($path, $callback, $roles)
+    {
+        $this->add('GET', $path, $callback, $roles);
+    }
+
+    public function post($path, $callback, $roles)
+    {
+        $this->add('POST', $path, $callback, $roles);
+    }
+
     public function dispatch($request)
     {
         if ($request->getMethod() === 'POST' && !validateCsrfToken()) {
@@ -45,23 +55,10 @@ class Router
                     return call_user_func($route['callback']);
                 }
                 
-                if (is_string($route['callback'])) {
-                    [$controller, $action] = explode('@', $route['callback']);
-                    
-                    // Require the controller file
-                    $controllerFile = __DIR__ . '/../Controllers/' . $controller . '.php';
-            
-                    if (file_exists($controllerFile)) {
-                        require_once $controllerFile;
-                        
-                        // Instantiate the controller and call the action
-                        $controllerInstance = new $controller();
-                        return $param != null ? $controllerInstance->$action(str_replace("/", "", $param)) : $controllerInstance->$action();
-                    } else {
-                        http_response_code(500);
-                        echo "Page file not found: $controllerFile";
-                        return;
-                    }
+                if (is_array($route['callback'])) {
+                    [$controller, $action] = $route['callback'];
+                    $controllerInstance = new $controller();
+                    return $param != null ? $controllerInstance->$action(str_replace("/", "", $param)) : $controllerInstance->$action();
                 }
             }
         }

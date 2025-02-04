@@ -731,8 +731,8 @@ abstract class Course extends BaseModel {
     {
         $sql = "SELECT
                     c.*,
-                    COUNT(e.id) AS enrollments_count,
-                    COUNT(r.id) AS rates_count,
+                    COUNT(DISTINCT e.id) AS enrollments_count,
+                    COUNT(DISTINCT r.id) AS rates_count,
                     AVG(r.rate) AS rate,
                     CONCAT(u.first_name, ' ', u.last_name) AS teacher_name
                 FROM courses c
