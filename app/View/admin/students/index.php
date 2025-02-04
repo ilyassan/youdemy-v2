@@ -53,7 +53,7 @@
         </div>
     </section>
 
-    <?php if (empty($teachers)): ?>
+    <?php if (empty($students)): ?>
         <div class="pt-10 px-6">
             <div class="text-center">
                 <div class="flex justify-center mb-6">

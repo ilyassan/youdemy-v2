@@ -101,9 +101,9 @@ class Student extends User
 
         if (!empty($filters["status"])) {
             if ($filters["status"] == "Active") {
-                $sql .= "HAVING total_courses > 0";
+                $sql .= "HAVING COUNT(en.course_id) > 0";
             } elseif ($filters["status"] == "Unactive") {
-                $sql .= "HAVING total_courses = 0";
+                $sql .= "HAVING COUNT(en.course_id) = 0";
             }
         }
 
@@ -136,7 +136,7 @@ class Student extends User
 
     public static function teacherStudents($teacherId, $keyword = "")
     {
-        $sql = "SELECT 
+        $sql = "SELECT
                     u.*,
                     COUNT(en.course_id) AS total_courses,
                     SUM(c.price) AS total_spents
@@ -149,8 +149,8 @@ class Student extends User
         if (!empty($keyword)) {
             $sql .= "HAVING u.first_name ILIKE :keyword
                     OR u.last_name ILIKE :keyword
-                    OR total_courses::text ILIKE :keyword
-                    OR total_spents::text ILIKE :keyword";
+                    OR COUNT(en.course_id)::text ILIKE :keyword
+                    OR SUM(c.price)::text ILIKE :keyword";
         }
 
         self::$db->query($sql);

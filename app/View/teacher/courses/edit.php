@@ -27,7 +27,7 @@
             <!-- Hidden File Input -->
             <label for="thumbnail" class="absolute inset-0 cursor-pointer rounded-lg">
                 <input type="file" id="thumbnail" name="thumbnail" class="hidden" accept="image/*">
-                <input type="hidden" name="current_thumbnail" value="<?= $course->getThumbnail() ?>">
+                <input type="hidden" name="current_thumbnail" value="<?= $course->getThumbnailName() ?>">
             </label>
         </div>
     </div>

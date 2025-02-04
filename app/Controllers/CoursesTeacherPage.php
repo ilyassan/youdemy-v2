@@ -243,7 +243,7 @@
             }
         
             // Handle thumbnail upload if new thumbnail provided
-            $thumbnailName = $course->getThumbnail();
+            $thumbnailName = $course->getThumbnailName();
             if (!empty($data['thumbnail']['name'])) {
                 $allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
                 if (in_array($data['thumbnail']['type'], $allowedTypes)) {

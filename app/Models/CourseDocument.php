@@ -33,7 +33,7 @@ class CourseDocument extends Course
         self::$db->bind(':teacher_id', $this->teacher_id);
         self::$db->bind(':category_id', $this->category_id);
 
-        $result = self::$db->execute();
+        $result = self::$db->single();
 
         if ($result) {
             $this->id = $result['id'];

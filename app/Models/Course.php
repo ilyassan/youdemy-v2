@@ -55,6 +55,11 @@ abstract class Course extends BaseModel {
         return $this->price;
     }
 
+    public function getThumbnailName()
+    {
+        return $this->thumbnail;
+    }
+
     public function getThumbnail()
     {
         return URLASSETS . 'images/thumbnails/' . $this->thumbnail;

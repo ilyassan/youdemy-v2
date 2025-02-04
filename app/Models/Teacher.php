@@ -127,7 +127,7 @@ class Teacher extends User
                         u.first_name ILIKE :keyword
                         OR u.last_name ILIKE :keyword
                         OR u.email ILIKE :keyword
-                    ) ";  // PostgreSQL ILIKE for case-insensitive search
+                    ) ";
         }
     
         if (isset($filters["verified"])) {
@@ -142,9 +142,9 @@ class Teacher extends User
     
         if (!empty($filters["status"])) {
             if ($filters["status"] == "Active") {
-                $sql .= "HAVING total_courses > 0";
+                $sql .= "HAVING COUNT(DISTINCT c.id) > 0";
             } elseif ($filters["status"] == "Unactive") {
-                $sql .= "HAVING total_courses = 0";
+                $sql .= "HAVING COUNT(DISTINCT c.id) = 0";
             }
         }
     

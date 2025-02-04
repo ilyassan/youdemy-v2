@@ -22,7 +22,7 @@ class CourseVideo extends Course
     {
         $sql = "INSERT INTO courses (title, description, price, thumbnail, document_name, video_name, teacher_id, category_id) 
                 VALUES (:title, :description, :price, :thumbnail, :document_name, :video_name, :teacher_id, :category_id)
-                RETURNING id"; // PostgreSQL specific way to return the inserted ID
+                RETURNING id";
         self::$db->query($sql);
         self::$db->bind(':title', $this->title);
         self::$db->bind(':description', $this->description);
@@ -33,7 +33,7 @@ class CourseVideo extends Course
         self::$db->bind(':teacher_id', $this->teacher_id);
         self::$db->bind(':category_id', $this->category_id);
 
-        $result = self::$db->execute();
+        $result = self::$db->single();
 
         if ($result) {
             $this->id = $result['id'];
