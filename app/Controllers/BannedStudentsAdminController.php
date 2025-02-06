@@ -1,6 +1,6 @@
 <?php
 
-    class BannedStudentsAdminPage extends BaseController
+    class BannedStudentsAdminController extends BaseController
     {
         public function index()
         {

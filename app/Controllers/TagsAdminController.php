@@ -1,6 +1,6 @@
 <?php
 
-    class TagsAdminPage extends BaseController
+    class TagsAdminController extends BaseController
     {
         public function index()
         {

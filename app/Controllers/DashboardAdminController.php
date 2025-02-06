@@ -1,6 +1,6 @@
 <?php
 
-    class DashboardAdminPage extends BaseController
+    class DashboardAdminController extends BaseController
     {
         public function index()
         {

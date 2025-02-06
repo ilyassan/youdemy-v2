@@ -1,6 +1,6 @@
 <?php
 
-    class HomePage extends BaseController
+    class HomeController extends BaseController
     {
         public function index()
         {

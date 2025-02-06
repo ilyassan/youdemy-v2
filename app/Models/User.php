@@ -38,7 +38,7 @@ class User extends BaseModel
         return $this->last_name;
     }
 
-    public function getFullName()
+     function getFullName()
     {
         return $this->first_name . " " . $this->last_name;
     }

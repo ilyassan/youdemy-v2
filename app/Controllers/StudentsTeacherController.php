@@ -1,5 +1,5 @@
 <?php
-    class StudentsTeacherPage extends BaseController
+    class StudentsTeacherController extends BaseController
     {
         public function index()
         {

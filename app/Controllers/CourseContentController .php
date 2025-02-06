@@ -1,6 +1,6 @@
 <?php
 
-    class CourseContentPage extends BaseController
+    class CourseContentController extends BaseController
     {
         public function index($id)
         {

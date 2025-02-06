@@ -1,6 +1,6 @@
 <?php
 
-    class CategoriesAdminPage extends BaseController
+    class CategoriesAdminController extends BaseController
     {
         public function index()
         {

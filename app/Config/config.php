@@ -4,7 +4,7 @@
     define('IMAGESROOT', __DIR__ . "\../../assets/images/");
     define('VIDEOSROOT', __DIR__ . "\../../assets/videos/");
     define('PDFSROOT', __DIR__ . "\../../assets/pdfs/");
-    define('URLROOT', 'http://localhost/youdemy/public/');
+    define('URLROOT', 'http://localhost/youdemy/');
     define('DB_USER', "postgres");
     define('DB_PASS', "root");
     define('DB_NAME', "youdemy");

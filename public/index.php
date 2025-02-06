@@ -21,49 +21,49 @@
     $router = new Router();
     $request = new Request();
 
-    $router->get('/', [HomePage::class, 'index'], ["visitor", "student"]);
-    $router->get('/courses', [CoursesPage::class, 'index'], ["visitor", "student"]);
-    $router->post('/courses/enroll/{id}', [CoursesPage::class, 'enroll'], ["student"]);
-    $router->post('/courses/completed/{id}', [CoursesPage::class, 'completed'], ["student"]);
-    $router->get('/courses/content/{id}', [CourseContentPage::class, 'index'], ["visitor", "student"]);
-    $router->get('/courses/{id}', [CoursesPage::class, 'show'], ["visitor", "student"]);
-    $router->get('/my-courses', [MyCoursesPage::class, 'index'], ["student"]);
+    $router->get('/', [HomeController::class, 'index'], ["visitor", "student"]);
+    $router->get('/courses', [CoursesController::class, 'index'], ["visitor", "student"]);
+    $router->post('/courses/enroll/{id}', [CoursesController::class, 'enroll'], ["student"]);
+    $router->post('/courses/completed/{id}', [CoursesController::class, 'completed'], ["student"]);
+    $router->get('/courses/content/{id}', [CourseContentController::class, 'index'], ["visitor", "student"]);
+    $router->get('/courses/{id}', [CoursesController::class, 'show'], ["visitor", "student"]);
+    $router->get('/my-courses', [MyCoursesController::class, 'index'], ["student"]);
 
-    $router->post('/api/rate/create', [MyCoursesPage::class, 'rateCourse'], ["student"]);
-    $router->post('/api/rate/delete', [MyCoursesPage::class, 'deleteCourseRate'], ["student"]);
+    $router->post('/api/rate/create', [MyCoursesController::class, 'rateCourse'], ["student"]);
+    $router->post('/api/rate/delete', [MyCoursesController::class, 'deleteCourseRate'], ["student"]);
 
-    $router->get('/', [DashboardTeacherPage::class, 'index'], ["teacher"]);
-    $router->get('/courses', [CoursesTeacherPage::class, 'index'], ["teacher"]);
-    $router->get('/courses/create', [CoursesTeacherPage::class, 'create'], ["teacher"]);
-    $router->post('/courses/store', [CoursesTeacherPage::class, 'store'], ["teacher"]);
-    $router->get('/courses/edit/{id}', [CoursesTeacherPage::class, 'edit'], ["teacher"]);
-    $router->post('/courses/update/{id}', [CoursesTeacherPage::class, 'update'], ["teacher"]);
-    $router->post('/courses/delete/{id}', [CoursesTeacherPage::class, 'delete'], ["teacher"]);
-    $router->get('/students', [StudentsTeacherPage::class, 'index'], ["teacher"]);
+    $router->get('/', [DashboardTeacherController::class, 'index'], ["teacher"]);
+    $router->get('/courses', [CoursesTeacherController::class, 'index'], ["teacher"]);
+    $router->get('/courses/create', [CoursesTeacherController::class, 'create'], ["teacher"]);
+    $router->post('/courses/store', [CoursesTeacherController::class, 'store'], ["teacher"]);
+    $router->get('/courses/edit/{id}', [CoursesTeacherController::class, 'edit'], ["teacher"]);
+    $router->post('/courses/update/{id}', [CoursesTeacherController::class, 'update'], ["teacher"]);
+    $router->post('/courses/delete/{id}', [CoursesTeacherController::class, 'delete'], ["teacher"]);
+    $router->get('/students', [StudentsTeacherController::class, 'index'], ["teacher"]);
 
-    $router->get('/', [DashboardAdminPage::class, 'index'], ["admin"]);
-    $router->get('/courses', [CoursesAdminPage::class, 'index'], ["admin"]);
-    $router->get('/courses/{id}', [CoursesAdminPage::class, 'show'], ["admin"]);
-    $router->post('/courses/delete/{id}', [CoursesAdminPage::class, 'delete'], ["admin"]);
-    $router->get('/teachers', [TeachersAdminPage::class, 'index'], ["admin"]);
-    $router->get('/students', [StudentsAdminPage::class, 'index'], ["admin"]);
-    $router->get('/banned-students', [BannedStudentsAdminPage::class, 'index'], ["admin"]);
-    $router->post('/students/ban/{id}', [BannedStudentsAdminPage::class, 'ban'], ["admin"]);
-    $router->post('/students/unban/{id}', [BannedStudentsAdminPage::class, 'unBan'], ["admin"]);
-    $router->get('/unverified-teachers', [UnverifiedTeachersAdminPage::class, 'index'], ["admin"]);
-    $router->post('/teachers/verify/{id}', [UnverifiedTeachersAdminPage::class, 'verify'], ["admin"]);
-    $router->get('/categories', [CategoriesAdminPage::class, 'index'], ["admin"]);
-    $router->post('/categories/store', [CategoriesAdminPage::class, 'store'], ["admin"]);
-    $router->post('/categories/delete', [CategoriesAdminPage::class, 'delete'], ["admin"]);
-    $router->get('/tags', [TagsAdminPage::class, 'index'], ["admin"]);
-    $router->post('/tags/store', [TagsAdminPage::class, 'store'], ["admin"]);
-    $router->post('/tags/delete', [TagsAdminPage::class, 'delete'], ["admin"]);
+    $router->get('/', [DashboardAdminController::class, 'index'], ["admin"]);
+    $router->get('/courses', [CoursesAdminController::class, 'index'], ["admin"]);
+    $router->get('/courses/{id}', [CoursesAdminController::class, 'show'], ["admin"]);
+    $router->post('/courses/delete/{id}', [CoursesAdminController::class, 'delete'], ["admin"]);
+    $router->get('/teachers', [TeachersAdminController::class, 'index'], ["admin"]);
+    $router->get('/students', [StudentsAdminController::class, 'index'], ["admin"]);
+    $router->get('/banned-students', [BannedStudentsAdminController::class, 'index'], ["admin"]);
+    $router->post('/students/ban/{id}', [BannedStudentsAdminController::class, 'ban'], ["admin"]);
+    $router->post('/students/unban/{id}', [BannedStudentsAdminController::class, 'unBan'], ["admin"]);
+    $router->get('/unverified-teachers', [UnverifiedTeachersAdminController::class, 'index'], ["admin"]);
+    $router->post('/teachers/verify/{id}', [UnverifiedTeachersAdminController::class, 'verify'], ["admin"]);
+    $router->get('/categories', [CategoriesAdminController::class, 'index'], ["admin"]);
+    $router->post('/categories/store', [CategoriesAdminController::class, 'store'], ["admin"]);
+    $router->post('/categories/delete', [CategoriesAdminController::class, 'delete'], ["admin"]);
+    $router->get('/tags', [TagsAdminController::class, 'index'], ["admin"]);
+    $router->post('/tags/store', [TagsAdminController::class, 'store'], ["admin"]);
+    $router->post('/tags/delete', [TagsAdminController::class, 'delete'], ["admin"]);
 
-    $router->get('/login', [LoginPage::class, 'index'], ["visitor"]);
-    $router->post('/login', [LoginPage::class, 'login'], ["visitor"]);
-    $router->get('/signup', [SignupPage::class, 'index'], ["visitor"]);
-    $router->post('/signup', [SignupPage::class, 'signup'], ["visitor"]);
+    $router->get('/login', [LoginController::class, 'index'], ["visitor"]);
+    $router->post('/login', [LoginController::class, 'login'], ["visitor"]);
+    $router->get('/signup', [SignupController::class, 'index'], ["visitor"]);
+    $router->post('/signup', [SignupController::class, 'signup'], ["visitor"]);
 
-    $router->post('/logout', [LoginPage::class, 'logout'], ["student", "teacher", "admin"]);
+    $router->post('/logout', [LoginController::class, 'logout'], ["student", "teacher", "admin"]);
 
     $router->dispatch($request);

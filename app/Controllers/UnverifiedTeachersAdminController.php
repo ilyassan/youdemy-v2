@@ -1,5 +1,5 @@
 <?php
-    class UnverifiedTeachersAdminPage extends BaseController
+    class UnverifiedTeachersAdminController extends BaseController
     {
         public function index()
         {
