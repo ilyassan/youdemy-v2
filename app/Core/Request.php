@@ -13,7 +13,7 @@ class Request
     {
         $path = $_SERVER['REQUEST_URI'] ?? '/';
         
-        $basePath = '/youdemy';
+        $basePath = BASEPATH;
         if (strpos($path, $basePath) === 0) {
             $path = substr($path, strlen($basePath));
         }

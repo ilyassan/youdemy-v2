@@ -76,7 +76,7 @@
                 </ul>
 
                 <!-- Download PDF Button -->
-                <div class="mt-6">
+                <div class="mt-6 space-y-3">
                     <a 
                         href="<?= URLASSETS . 'pdfs/ilyass.pdf' ?>" 
                         download
@@ -84,6 +84,15 @@
                     >
                         <i class="fas fa-download mr-2"></i>
                         Download PDF
+                    </a>
+
+                    <!-- New Certification Download Button -->
+                    <a 
+                        href="<?= URLROOT . 'courses/certify/' . $course->getId() ?>"
+                        class="w-full bg-gradient-to-r from-indigo-600 to-indigo-700 text-white py-3 rounded-lg font-medium hover:from-indigo-700 hover:to-indigo-800 transition flex items-center justify-center shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+                    >
+                        <i class="fas fa-certificate mr-2"></i>
+                        Download Certificate
                     </a>
                 </div>
 

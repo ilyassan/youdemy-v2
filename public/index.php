@@ -25,7 +25,8 @@
     $router->get('/courses', [CoursesController::class, 'index'], ["visitor", "student"]);
     $router->post('/courses/enroll/{id}', [CoursesController::class, 'enroll'], ["student"]);
     $router->post('/courses/completed/{id}', [CoursesController::class, 'completed'], ["student"]);
-    $router->get('/courses/content/{id}', [CourseContentController::class, 'index'], ["visitor", "student"]);
+    $router->get('/courses/content/{id}', [CourseContentController::class, 'index'], ["student"]);
+    $router->get('/courses/certify/{id}', [CourseContentController::class, 'certify'], ["student"]);
     $router->get('/courses/{id}', [CoursesController::class, 'show'], ["visitor", "student"]);
     $router->get('/my-courses', [MyCoursesController::class, 'index'], ["student"]);
 
